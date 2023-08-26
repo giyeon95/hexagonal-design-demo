@@ -5,4 +5,6 @@ enum class ErrorType(
     val message: String
 ) {
     AUTH_FAIL(400101, "Authentication fail"),
+
+    PRODUCT_NOT_FOUND(404102, "product not found"),
 }
