@@ -1,7 +1,7 @@
-package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web
+package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.user
 
-import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.model.UserLoginReq
-import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.model.UserLoginRes
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.user.model.UserLoginReq
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.user.model.UserLoginRes
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.UserLoginUseCase
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.model.LoginCommand
 import org.springframework.web.bind.annotation.PostMapping

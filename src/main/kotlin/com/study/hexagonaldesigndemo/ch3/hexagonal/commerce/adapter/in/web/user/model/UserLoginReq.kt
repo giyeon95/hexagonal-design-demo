@@ -1,4 +1,4 @@
-package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.model
+package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.user.model
 
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.model.LoginType
 
