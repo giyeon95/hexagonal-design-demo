@@ -1,9 +1,14 @@
 package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.order
 
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.order.model.OrderCreateReq
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.order.model.OrderRes
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.adapter.`in`.web.order.model.OrdersRes
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.GetMemberQuery
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.GetOrderQuery
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.OrderRegistrationUseCase
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.model.OrderItemRegisterCommand
+import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.application.port.`in`.model.OrderRegisterCommand
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,6 +16,7 @@ import org.springframework.web.bind.annotation.*
 class OrderController(
     private val memberQuery: GetMemberQuery,
     private val orderQuery: GetOrderQuery,
+    private val orderRegistrationUseCase: OrderRegistrationUseCase,
 ) {
     @GetMapping
     fun getOrders(
@@ -26,12 +32,23 @@ class OrderController(
         )
     }
 
-//    @PostMapping
-//    fun registerOrder(
-//
-//    ) {
-//
-//    }
+    @PostMapping
+    fun registerOrder(
+        @RequestBody @Valid orderCreateReq: OrderCreateReq,
+    ) {
+        val member = memberQuery.getMember(orderCreateReq.customerId)
+        orderRegistrationUseCase.register(
+            OrderRegisterCommand(
+                items = orderCreateReq.items.map {
+                    OrderItemRegisterCommand(
+                        productId = it.productId,
+                        quantity = it.quantity
+                    )
+                }.toList(),
+                customer = member
+            )
+        )
+    }
 
     @GetMapping("/{id}")
     fun getOrder(

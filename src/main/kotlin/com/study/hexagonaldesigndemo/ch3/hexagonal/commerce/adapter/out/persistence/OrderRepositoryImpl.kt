@@ -6,6 +6,7 @@ import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.domain.order.OrderIt
 import com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.domain.order.OrderStatus
 import org.springframework.stereotype.Repository
 import java.math.BigDecimal
+import java.util.concurrent.atomic.AtomicLong
 
 @Repository
 class OrderRepositoryImpl : OrderRepository {
@@ -18,8 +19,15 @@ class OrderRepositoryImpl : OrderRepository {
         return mockOrders.find { it.id == id }
     }
 
+    override fun save(order: Order) {
+        mockOrders.add(order.apply {
+            this.id = autoIncrement.getAndIncrement()
+        })
+    }
+
     companion object {
-        private val mockOrders: List<Order> = listOf(
+        private var autoIncrement = AtomicLong(4)
+        private val mockOrders: MutableList<Order> = mutableListOf(
             Order(
                 id = 1L,
                 customerId = 1L,
@@ -62,7 +70,6 @@ class OrderRepositoryImpl : OrderRepository {
                 ),
                 status = OrderStatus.DELIVERED
             ),
-
             Order(
                 id = 3L,
                 customerId = 1L,
