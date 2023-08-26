@@ -3,7 +3,7 @@ package com.study.hexagonaldesigndemo.ch3.hexagonal.commerce.domain.order
 import java.math.BigDecimal
 
 data class OrderItem(
-    val id: Long,
+    var id: Long? = null,
     val productId: Long,
     val productName: String,
     val quantity: Int,

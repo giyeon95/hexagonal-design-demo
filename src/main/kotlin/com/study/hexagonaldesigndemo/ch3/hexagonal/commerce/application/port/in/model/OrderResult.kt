@@ -11,7 +11,7 @@ data class OrderResult(
     companion object {
         fun of(order: Order): OrderResult {
             return OrderResult(
-                id = order.id,
+                id = order.id!!,
                 status = order.status,
                 items = order.items.map { item ->
                     OrderItemResult.of(item)

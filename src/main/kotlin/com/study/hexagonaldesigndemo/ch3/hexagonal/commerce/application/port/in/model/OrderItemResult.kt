@@ -13,7 +13,7 @@ data class OrderItemResult(
     companion object {
         fun of(item: OrderItem): OrderItemResult {
             return OrderItemResult(
-                id = item.id,
+                id = item.id!!,
                 productId = item.productId,
                 productName = item.productName,
                 quantity = item.quantity,

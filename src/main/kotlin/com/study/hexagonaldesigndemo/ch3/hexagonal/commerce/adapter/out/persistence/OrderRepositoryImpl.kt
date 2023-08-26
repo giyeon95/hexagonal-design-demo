@@ -22,16 +22,22 @@ class OrderRepositoryImpl : OrderRepository {
     override fun save(order: Order) {
         mockOrders.add(order.apply {
             this.id = autoIncrement.getAndIncrement()
+            this.items = order.items.map {
+                it.apply {
+                    this.id = itemAutoIncrement.getAndIncrement()
+                }
+            }.toMutableList()
         })
     }
 
     companion object {
         private var autoIncrement = AtomicLong(4)
+        private var itemAutoIncrement = AtomicLong(1)
         private val mockOrders: MutableList<Order> = mutableListOf(
             Order(
                 id = 1L,
                 customerId = 1L,
-                items = listOf(
+                items = mutableListOf(
                     OrderItem(
                         id = 1L,
                         productId = 1L,
@@ -52,7 +58,7 @@ class OrderRepositoryImpl : OrderRepository {
             Order(
                 id = 2L,
                 customerId = 2L,
-                items = listOf(
+                items = mutableListOf(
                     OrderItem(
                         id = 3L,
                         productId = 1L,
@@ -73,7 +79,7 @@ class OrderRepositoryImpl : OrderRepository {
             Order(
                 id = 3L,
                 customerId = 1L,
-                items = listOf(
+                items = mutableListOf(
                     OrderItem(
                         id = 5L,
                         productId = 1L,

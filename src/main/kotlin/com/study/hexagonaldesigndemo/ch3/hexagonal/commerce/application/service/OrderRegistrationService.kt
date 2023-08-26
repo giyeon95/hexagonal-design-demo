@@ -29,13 +29,12 @@ class OrderRegistrationService(
                 require(product.quantity < it.quantity) { "product 갯수가 부족합니다." }
 
                 OrderItem(
-                    id = 1L,  // 간소화를 위한 하드코딩
                     productId = it.productId,
                     productName = product.name,
                     quantity = it.quantity,
                     price = product.price,
                 )
-            }.toList()
+            }.toMutableList()
 
             orderRepository.save(
                 Order(
