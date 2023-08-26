@@ -20,7 +20,7 @@ class UserLoginService(
     private val oAuthGoogleStatePort: OAuthGoogleStatePort,
 ) : UserLoginUseCase {
     override fun login(loginCommand: LoginCommand): LoginResult {
-        val member = memberRepository.findByEmail(loginCommand.email)
+        val member = memberRepository.findByEmail(loginCommand.email) ?: throw AuthenticationException("email is not found")
         member.verifyPasswordByType(loginCommand)
 
         return LoginResult(member.id, member.email, member.name, "token")

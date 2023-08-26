@@ -5,6 +5,7 @@ import java.math.BigDecimal
 data class OrderItem(
     val id: Long,
     val productId: Long,
+    val productName: String,
     val quantity: Int,
     val price: BigDecimal
 )
