@@ -30,6 +30,11 @@ class OrderRepositoryImpl : OrderRepository {
         })
     }
 
+    override fun update(order: Order) {
+        val idx = mockOrders.indexOfFirst { it.id == order.id }
+        mockOrders[idx] = order
+    }
+
     companion object {
         private var autoIncrement = AtomicLong(4)
         private var itemAutoIncrement = AtomicLong(1)

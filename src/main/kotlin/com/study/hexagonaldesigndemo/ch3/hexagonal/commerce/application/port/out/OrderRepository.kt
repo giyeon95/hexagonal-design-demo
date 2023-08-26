@@ -6,4 +6,5 @@ interface OrderRepository {
     fun findAllByCustomerId(customerId: Long): List<Order>
     fun findByIdOrNull(id: Long): Order?
     fun save(order: Order)
+    fun update(order: Order)
 }
