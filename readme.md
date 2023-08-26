@@ -5,7 +5,7 @@
 
 
 ## 2. API 구성
-- 로그인 /api/v1/login
+- 로그인 /api/v1/auth/login
 
 - 상품 목록 조회: GET /api/v1/products
 - 상품 상세 조회: GET /api/v1/products/{id}
